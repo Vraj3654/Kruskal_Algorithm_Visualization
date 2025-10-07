@@ -145,11 +145,13 @@ function drawGraph(V, allEdges, mstEdges = []) {
 const setupBtn = document.getElementById('setup-btn');
 const edgeInputsContainer = document.getElementById('edge-inputs-container');
 
+// This listener handles the initial setup to generate the connection fields
 setupBtn.addEventListener('click', () => {
     const V = parseInt(document.getElementById('vertices').value);
     const E = parseInt(document.getElementById('edges').value);
 
     if (isNaN(V) || V <= 0 || isNaN(E) || E < 0) {
+        // Using a custom modal/alert in the future would be better than the default alert
         alert('Please enter a valid, positive number for vertices and a non-negative number for edges.');
         return;
     }
@@ -174,12 +176,16 @@ setupBtn.addEventListener('click', () => {
     edgeInputsContainer.innerHTML = inputsHTML;
     
     drawGraph(V, []);
+});
 
-    const calculateBtn = document.getElementById('calculate-btn');
-    if(calculateBtn) {
-         calculateBtn.addEventListener('click', calculateAndDisplayMST);
+// This listener uses event delegation to reliably handle clicks on the "Calculate MST" button
+edgeInputsContainer.addEventListener('click', (event) => {
+    // We check if the element that was clicked is the button we're interested in
+    if (event.target && event.target.id === 'calculate-btn') {
+        calculateAndDisplayMST();
     }
 });
+
 
 function calculateAndDisplayMST() {
     const V = parseInt(document.getElementById('vertices').value);
@@ -200,6 +206,16 @@ function calculateAndDisplayMST() {
             hasError = true;
             break;
         }
+        
+        // --- NEW VALIDATION ---
+        // Check for self-loops (source and destination are the same)
+        if (source === destination) {
+            alert(`Warning: Edge ${i + 1} is a self-loop (source and destination are the same). Please provide a valid connection.`);
+            hasError = true;
+            break;
+        }
+        // --- END OF NEW VALIDATION ---
+
         allEdges.push({ source, destination, weight });
     }
 
@@ -241,4 +257,5 @@ window.addEventListener('resize', () => {
         }
     }
 });
+
 

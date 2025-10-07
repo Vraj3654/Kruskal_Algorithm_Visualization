@@ -1,0 +1,63 @@
+/*
+ * Main Stylesheet for Kruskal's Algorithm Visualizer
+ */
+
+/* Sets the default font for the entire page */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/*
+ * Input Field Styling
+ * The !important flag is used to force override any stubborn browser default styles,
+ * ensuring the text is always visible.
+ */
+.input-field {
+    background-color: #E5E7EB !important; /* A light gray (Tailwind's gray-200) */
+    color: #111827 !important;           /* A very dark gray/black (Tailwind's gray-900) */
+    border: 1px solid #9CA3AF;           /* A medium gray border */
+    border-radius: 0.375rem;             /* rounded-md */
+    padding: 0.5rem;                     /* p-2 */
+    width: 100%;
+}
+
+/* Style for the placeholder text inside input fields */
+.input-field::placeholder {
+    color: #6B7280; /* gray-500 */
+}
+
+/* Style for when an input field is focused (clicked on) */
+.input-field:focus {
+    outline: none;
+    --tw-ring-color: #14B8A6; /* teal-500 */
+    box-shadow: 0 0 0 2px var(--tw-ring-color);
+    border-color: var(--tw-ring-color);
+}
+
+/*
+ * General Button Styling
+ */
+.btn {
+    width: 100%;
+    background-color: #14B8A6; /* teal-500 */
+    color: white;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.375rem; /* rounded-md */
+    transition: background-color 0.2s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+/* Style for when hovering over a button */
+.btn:hover {
+    background-color: #0D9488; /* teal-600 */
+}
+
+/* Style for when a button is focused */
+.btn:focus {
+    outline: none;
+    --tw-ring-color: #14B8A6;
+    box-shadow: 0 0 0 2px var(--tw-ring-color);
+}
